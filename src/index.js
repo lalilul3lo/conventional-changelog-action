@@ -1,5 +1,6 @@
 const core = require('@actions/core')
 const conventionalRecommendedBump = require('conventional-recommended-bump')
+const cc = require('conventional-changelog-conventionalcommits');
 const path = require('path')
 
 const getVersioning = require('./version')
@@ -91,7 +92,20 @@ async function run() {
       await git.pull()
     }
 
-    const config = conventionalConfigFile && requireScript(conventionalConfigFile)
+    // const config = conventionalConfigFile && requireScript(conventionalConfigFile)
+
+    const config = cc({
+      "types": [
+          {"type": "feat", "section": "🚀 Features"},
+          {"type": "fix", "section": "🐛 Bug Fixes"},
+          {"type": "perf", "section": "🏎️ Performance"},
+          {"type": "chore", "hidden": true},
+          {"type": "docs", "hidden": true},
+          {"type": "style", "hidden": true},
+          {"type": "refactor", "hidden": true},
+          {"type": "test", "hidden": true}
+      ]
+    })
 
     conventionalRecommendedBump({ preset, tagPrefix, config, skipUnstable: !prerelease }, async (error, recommendation) => {
       if (error) {
