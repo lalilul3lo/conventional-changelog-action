@@ -106,10 +106,14 @@ async function run() {
           {"type": "test", "hidden": true}
       ]
     })
-
     core.info("lalilulelo")
 
-    conventionalRecommendedBump({ preset, tagPrefix, config, skipUnstable: !prerelease }, async (error, recommendation) => {
+    console.log(config, 'console.log')
+
+    core.info(config, 'core.info')
+
+
+    conventionalRecommendedBump({ preset: '', tagPrefix, config, skipUnstable: !prerelease }, async (error, recommendation) => {
       if (error) {
         core.setFailed(error.message)
         return
