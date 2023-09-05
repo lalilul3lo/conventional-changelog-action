@@ -32,7 +32,7 @@ async function run() {
     const gitPush = core.getBooleanInput('git-push')
     const gitBranch = core.getInput('git-branch').replace('refs/heads/', '')
     const tagPrefix = core.getInput('tag-prefix')
-    const preset = !core.getInput('config-file-path') ? core.getInput('preset') : ''
+    const preset = ''
     const preCommitFile = core.getInput('pre-commit')
     const outputFile = core.getInput('output-file')
     const releaseCount = core.getInput('release-count')
@@ -113,7 +113,7 @@ async function run() {
     core.info(config, 'core.info')
 
 
-    conventionalRecommendedBump({ preset: '', tagPrefix, config, skipUnstable: !prerelease }, async (error, recommendation) => {
+    conventionalRecommendedBump({ preset, tagPrefix, config, skipUnstable: !prerelease }, async (error, recommendation) => {
       if (error) {
         core.setFailed(error.message)
         return
