@@ -107,6 +107,8 @@ async function run() {
       ]
     })
 
+    core.info("lalilulelo")
+
     conventionalRecommendedBump({ preset, tagPrefix, config, skipUnstable: !prerelease }, async (error, recommendation) => {
       if (error) {
         core.setFailed(error.message)
